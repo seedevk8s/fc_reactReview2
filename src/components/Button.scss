@@ -1,4 +1,19 @@
 $blue: #228be6; //스타일 파일에서 사용 할 수 있는 변수를 선언
+$gray: #495057;
+$pink: #f06595;
+
+/* 반복이 되는 코드는 Sass 의 mixin 이라는 기능을 사용하여 쉽게 재사용 할 수 있습니다. 
+한번, button-color라는 mixin 을 만들어서 사용해보겠습니다. */
+@mixin button-color($color) {
+  background: $color;
+  &:hover {
+    background: lighten($color, 10%);
+  }
+
+  &:active {
+    background: darken($color, 10%);
+  }
+}
 
 .Button {
   display: inline-flex;
@@ -31,13 +46,18 @@ $blue: #228be6; //스타일 파일에서 사용 할 수 있는 변수를 선언
     font-size: 1rem;
   }
 
-  background: $blue;
-  &:hover {
-    background: lighten($blue, 10%);
+  // 색상별 관리
+  // CSS 클래스에 따라 다른 색상이 적용되도록
+  &.blue {
+    @include button-color($blue);
   }
 
-  &:active {
-    background: darken($blue, 10%);
+  &.gray {
+    @include button-color($gray);
+  }
+
+  &.pink {
+    @include button-color($pink);
   }
 
   //.Button + .Button
